@@ -28,20 +28,19 @@ const Todos=()=>{
     }
 
     const onChangeStatus=event=>{
-        console.log(event.target.value)
         setStatus(event.target.value)
     }
 
     const onChangePriority=event=>{
-        console.log(event.target.value)
         setPriority(event.target.value)
     }
 
     const notify = () => {
+        console.log("Toast message:", response)
         toast(response);
+
         setResponse("");
     };
-
 
     useEffect(()=>{
         const fetchTodos= async ()=>{
@@ -58,11 +57,7 @@ const Todos=()=>{
 
         }
         fetchTodos()
-
-        if (response) {
-            notify(response);
-        }
-    },[response])
+    },[])
 
      const onSearchTodos=async ()=>{
         let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
@@ -74,10 +69,8 @@ const Todos=()=>{
         };
         const response= await fetch(url,options)
         const data= await response.json()
-        console.log(data)
         setTodos(data)
-
-        } 
+   }
     
 
     const addNewTodo= async  ()=>{
@@ -102,6 +95,9 @@ const Todos=()=>{
         setTodoText("")
         setTodos([...todos,newTodo]);
         setResponse(responseText)
+        if(response.ok){
+            notify()
+        }
     }
 
 
@@ -126,6 +122,9 @@ const Todos=()=>{
         setTodos(updatedTodos);
         setTodoText("")
         setResponse(responseText)
+        if(response.ok){
+            notify()
+        }
     }
 
     const onDeleteTodo= async   (todoId)=>{
@@ -140,6 +139,9 @@ const Todos=()=>{
         const todosAfterDelete=todos.filter(eachTodo=>(eachTodo.id!==todoId))
         setTodos(todosAfterDelete)
         setResponse(responseText)
+        if(response.ok){
+            notify()
+        }
     }
 
     return (

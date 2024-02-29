@@ -6,33 +6,27 @@
     margin-top: 15px;
 }
 
-.button {
-    color: white;
-    background-color: #4c63b6;
-    font-family: "Roboto";
-    font-size: 18px;
-    border-width: 0;
-    border-radius: 4px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 20px;
-    padding-left: 20px;
-} /* save button */
-
 .label-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    background-color: #e6f6ff;
+    background-color: #86ccf4;
     width: 90%;
+    height:50px;
     border: 5px solid #096f92;
     border-right: none;
     border-top: none;
     border-bottom: none;
     border-radius: 4px;
+}
+
+.delete-update-con{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width:10%;
 }
 
 .checkbox-input {
@@ -57,22 +51,38 @@
 
 .delete-icon-container {
     text-align: right;
-    width: 28%;
+    width: 35%;
     cursor:pointer;
 }
 .delete-icon-container :hover{
-    background-color: pink;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    background-color: lightgray;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
 
 }
 
 .delete-icon {
-    padding: 5px;
+    padding: 13px;
 }
 
 .checked {
     text-decoration: line-through;
+}
+
+.button {
+    color: white;
+    background-color: #4c63b6;
+    font-family: "Roboto";
+    font-size: 18px;
+    border-width: 0;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    cursor:pointer;
 }
