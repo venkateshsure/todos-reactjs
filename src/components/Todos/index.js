@@ -2,6 +2,9 @@
 
 import { CiSearch } from "react-icons/ci";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {useState,useEffect} from 'react';
 
 
@@ -14,6 +17,7 @@ const Todos=()=>{
     const [status,setStatus]=useState("")
     const [priority,setPriority]=useState("")
     const [todos,setTodos]=useState([])
+    const [response,setResponse]=useState(false)
 
     const onEnterTodo=(event)=>{
         setTodoText(event.target.value)
@@ -33,6 +37,11 @@ const Todos=()=>{
         setPriority(event.target.value)
     }
 
+    const notify = () => {
+        toast(response);
+    };
+
+
     useEffect(()=>{
         const fetchTodos= async ()=>{
         let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
@@ -48,7 +57,11 @@ const Todos=()=>{
 
         }
         fetchTodos()
-    })
+
+        if (response) {
+            notify(response);
+        }
+    },[response])
 
     /* const onSearchTodos=async ()=>{
         let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
@@ -68,7 +81,6 @@ const Todos=()=>{
 
     const addNewTodo= async  ()=>{
         const todoLength=todos.length
-        console.log(todoText)
         let newTodo = {
             "id": parseInt(todoLength)+1,
             "priority": priority,
@@ -85,11 +97,10 @@ const Todos=()=>{
             body:JSON.stringify(newTodo)
         };
         const response= await fetch(url,options)
-        console.log(response)
-        const data= await response.text()
+        const responseText= await response.text()
         setTodoText("")
         setTodos([...todos,newTodo]);
-        console.log(data)
+        setResponse(responseText)
     }
 
 
@@ -112,12 +123,11 @@ const Todos=()=>{
         const responseText=await response.text()
         const updatedTodos = todos.map(todo => todo.id === id ? { ...todo, todo: todoText } : todo);
         setTodos(updatedTodos);
-        console.log(responseText) 
         setTodoText("")
+        setResponse(responseText)
     }
 
     const onDeleteTodo= async   (todoId)=>{
-        console.log(todoId)
         let deleteUrl = `https://backenedtodo-app-production.up.railway.app/todos/${todoId}/`;
 
         let deleteOptions = {
@@ -128,7 +138,7 @@ const Todos=()=>{
         const responseText=await response.text()
         const todosAfterDelete=todos.filter(eachTodo=>(eachTodo.id!==todoId))
         setTodos(todosAfterDelete)
-        console.log(responseText)
+        setResponse(responseText)
     }
 
     return (
@@ -189,6 +199,7 @@ const Todos=()=>{
                     </ul>
                     
                 </div>
+                <ToastContainer />
             </div>
     )
 }
