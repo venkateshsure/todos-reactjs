@@ -22,6 +22,51 @@
     margin-bottom: 20px;
 }
 
+.todos-user-input-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width:100%;
+}
+
+.todo-radio-select-con{
+    width:60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.todo-radio-con{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width:60%;
+}
+
+.each-radio-con{
+    display: flex;
+    align-items: center;
+    width:100%;
+}
+
+.todo-select-con{
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+}
+
+.form-control{
+    margin-top:10px;
+}
+
+
 .create-task-heading {
     font-family: "Roboto";
     font-size: 32px;
@@ -32,6 +77,35 @@
     font-family: "Roboto";
     font-size: 32px;
     font-weight: 500;
+}
+
+.search-con{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width:25%;
+    background-color: lightgrey;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+    border:1px solid #1a4a89;
+}
+
+.input-search{
+    font-size:15px;
+    margin-top: 10px;
+    padding: 15px;
+    width:88%;
+    border:none;
+    outline:none;
+    background: transparent;
+}
+
+.search-icon{
+    cursor:pointer;
+    width:28%;
 }
 
 .todo-items-heading {

@@ -1,4 +1,7 @@
 
+
+import { CiSearch } from "react-icons/ci";
+
 import {useState,useEffect} from 'react';
 
 
@@ -7,15 +10,32 @@ import './index.css'
 
 const Todos=()=>{
     const [todoText,setTodoText]=useState("")
+    const [searchInput,setSearchTodo]=useState("")
+    const [status,setStatus]=useState("")
+    const [priority,setPriority]=useState("")
     const [todos,setTodos]=useState([])
 
     const onEnterTodo=(event)=>{
         setTodoText(event.target.value)
     }
 
+    const onSearchText=event=>{
+        setSearchTodo(event.target.value)
+    }
+
+    const onChangeStatus=event=>{
+        console.log(event.target.value)
+        setStatus(event.target.value)
+    }
+
+    const onChangePriority=event=>{
+        console.log(event.target.value)
+        setPriority(event.target.value)
+    }
+
     useEffect(()=>{
         const fetchTodos= async ()=>{
-        let url="https://backenedtodo-app-production.up.railway.app/todos/"
+        let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
         let options = {
             method: 'GET',
             headers: {
@@ -28,15 +48,31 @@ const Todos=()=>{
 
         }
         fetchTodos()
-    },[])
+    })
+
+    /* const onSearchTodos=async ()=>{
+        let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
+        let options = {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'applications/json'
+            }
+        };
+        const response= await fetch(url,options)
+        const data= await response.json()
+        console.log(data)
+        setTodos(data)
+
+        } */
+    
 
     const addNewTodo= async  ()=>{
         const todoLength=todos.length
         console.log(todoText)
         let newTodo = {
             "id": parseInt(todoLength)+1,
-            "priority": "HIGH",
-            "status": "IN PROGRESS",
+            "priority": priority,
+            "status": status,
             "todo": todoText,
         };
         let url="https://backenedtodo-app-production.up.railway.app/todos/"
@@ -102,13 +138,48 @@ const Todos=()=>{
                     <h1 className="create-task-heading">
                         Create <span className="create-task-heading-subpart">Task</span>
                     </h1>
-                    <input value={todoText} type="text" className="todo-user-input" placeholder="What needs to be done?" onChange={onEnterTodo}/>
+                    <div className="todos-user-input-con">
+                            
+                            <input value={todoText} type="text" className="todo-user-input" placeholder="What needs to be done?" onChange={onEnterTodo}/>
+                        
+                        
+                   <div className="todo-radio-select-con">
+
+                   <div className="todo-radio-con">
+                            <h1 className="create-task-heading">Status</h1>
+                            <div className="each-radio-con">
+                                <input onChange={onChangeStatus} value="TO DO" type="radio" name="status" id="To Do"  />
+                                <label htmlFor="To Do">TO DO</label>
+                                <input onChange={onChangeStatus} value="IN PROGRESS" type="radio" name="status" id="In Progress"/>
+                                <label htmlFor="In Progress">IN PROGRESS</label>
+                                <input onChange={onChangeStatus} value="DONE" type="radio" name="status" id="Done"/>
+                                <label htmlFor="Done">DONE</label>
+                            </div>
+                    </div>
+
+
+                    <div className="todo-select-con">
+                        <label className="create-task-heading" htmlFor="priority">Priority</label>
+                        <select onChange={onChangePriority} id="priority" className="form-control">
+                            <option value="LOW">LOW</option>
+                            <option value="MEDIUM">MEDIUM</option>
+                            <option value="HIGH">HIGH</option>
+                        </select>
+                    </div>
+                    </div>
+        
+                    </div>
+                    
                     <div>
                         <button className="button" onClick={addNewTodo}>Add</button>
                     </div>
                     <h1 className="todo-items-heading">
                         My <span className="todo-items-heading-subpart">Tasks</span>
                     </h1>
+                    <div className="search-con">
+                        <input  value={searchInput} onChange={onSearchText} type="search" className="input-search" placeholder="Search Todo"/>
+                        <CiSearch className="search-icon"/>
+                    </div>
                     <ul className="todo-items-container">
                         {
                             todos.map((eachTodo)=>{
