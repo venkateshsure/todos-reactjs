@@ -1,16 +1,9 @@
 .todo-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:90%;
     margin-top: 15px;
-}
-
-.todo-user-input {
-    background-color: white;
-    width: 100%;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #e4e7eb;
-    border-radius: 10px;
-    margin-top: 10px;
-    padding: 15px;
 }
 
 .button {
@@ -26,14 +19,16 @@
     padding-bottom: 5px;
     padding-right: 20px;
     padding-left: 20px;
-}
+} /* save button */
 
 .label-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     background-color: #e6f6ff;
-    width: 100%;
-    border-style: solid;
-    border-width: 5px;
-    border-color: #096f92;
+    width: 90%;
+    border: 5px solid #096f92;
     border-right: none;
     border-top: none;
     border-bottom: none;
@@ -62,11 +57,20 @@
 
 .delete-icon-container {
     text-align: right;
-    width: 18%;
+    width: 28%;
+    cursor:pointer;
+}
+.delete-icon-container :hover{
+    background-color: pink;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
 }
 
 .delete-icon {
-    padding: 15px;
+    padding: 5px;
 }
 
 .checked {
