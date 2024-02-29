@@ -17,7 +17,7 @@ const Todos=()=>{
     const [status,setStatus]=useState("")
     const [priority,setPriority]=useState("")
     const [todos,setTodos]=useState([])
-    const [response,setResponse]=useState(false)
+    const [response,setResponse]=useState("")
 
     const onEnterTodo=(event)=>{
         setTodoText(event.target.value)
@@ -39,12 +39,13 @@ const Todos=()=>{
 
     const notify = () => {
         toast(response);
+        setResponse("");
     };
 
 
     useEffect(()=>{
         const fetchTodos= async ()=>{
-        let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
+        let url="https://backenedtodo-app-production.up.railway.app/todos/"
         let options = {
             method: 'GET',
             headers: {
@@ -63,7 +64,7 @@ const Todos=()=>{
         }
     },[response])
 
-    /* const onSearchTodos=async ()=>{
+     const onSearchTodos=async ()=>{
         let url=`https://backenedtodo-app-production.up.railway.app/todos/?search_q=%${searchInput}%`
         let options = {
             method: 'GET',
@@ -76,7 +77,7 @@ const Todos=()=>{
         console.log(data)
         setTodos(data)
 
-        } */
+        } 
     
 
     const addNewTodo= async  ()=>{
@@ -188,7 +189,7 @@ const Todos=()=>{
                     </h1>
                     <div className="search-con">
                         <input  value={searchInput} onChange={onSearchText} type="search" className="input-search" placeholder="Search Todo"/>
-                        <CiSearch className="search-icon"/>
+                        <CiSearch className="search-icon" onClick={onSearchTodos}/>
                     </div>
                     <ul className="todo-items-container">
                         {
