@@ -2,8 +2,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width:90%;
+    width:100%;
     margin-top: 15px;
+    transition:transform 0.3s ease;
+}
+      
+.todo-item-container :hover {
+    transform: scale(0.9);
 }
 
 .label-container {
@@ -12,7 +17,7 @@
     align-items: center;
     justify-content: space-around;
     background-color: #86ccf4;
-    width: 90%;
+    width: 80%;
     height:50px;
     border: 5px solid #096f92;
     border-right: none;

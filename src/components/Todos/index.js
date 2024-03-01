@@ -17,7 +17,6 @@ const Todos=()=>{
     const [status,setStatus]=useState("")
     const [priority,setPriority]=useState("")
     const [todos,setTodos]=useState([])
-    const [response,setResponse]=useState("")
 
     const onEnterTodo=(event)=>{
         setTodoText(event.target.value)
@@ -35,11 +34,9 @@ const Todos=()=>{
         setPriority(event.target.value)
     }
 
-    const notify = () => {
+    const notify = (response) => {
         console.log("Toast message:", response)
         toast(response);
-
-        setResponse("");
     };
 
     useEffect(()=>{
@@ -70,6 +67,7 @@ const Todos=()=>{
         const response= await fetch(url,options)
         const data= await response.json()
         setTodos(data)
+        setSearchTodo("")
    }
     
 
@@ -94,9 +92,8 @@ const Todos=()=>{
         const responseText= await response.text()
         setTodoText("")
         setTodos([...todos,newTodo]);
-        setResponse(responseText)
         if(response.ok){
-            notify()
+            notify(responseText)
         }
     }
 
@@ -121,9 +118,8 @@ const Todos=()=>{
         const updatedTodos = todos.map(todo => todo.id === id ? { ...todo, todo: todoText } : todo);
         setTodos(updatedTodos);
         setTodoText("")
-        setResponse(responseText)
         if(response.ok){
-            notify()
+            notify(responseText)
         }
     }
 
@@ -137,10 +133,9 @@ const Todos=()=>{
        const response=await  fetch(deleteUrl, deleteOptions)
         const responseText=await response.text()
         const todosAfterDelete=todos.filter(eachTodo=>(eachTodo.id!==todoId))
-        setTodos(todosAfterDelete)
-        setResponse(responseText)
+         setTodos(todosAfterDelete)
         if(response.ok){
-            notify()
+            notify(responseText)
         }
     }
 
@@ -195,6 +190,7 @@ const Todos=()=>{
                     </div>
                     <ul className="todo-items-container">
                         {
+                            todos.length===0?<h2 className="no-todos">NO TODOS!</h2>:
                             todos.map((eachTodo)=>{
                                 return <EachTodo eachTodo={eachTodo} key={eachTodo.id} onUpdateTodo={onUpdateTodo} onDeleteTodo={onDeleteTodo}/>
                             })

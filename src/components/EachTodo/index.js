@@ -5,12 +5,12 @@ import './index.css'
 
 const EachTodo=(props)=>{
    const {eachTodo,onUpdateTodo,onDeleteTodo}=props
-   const {id,todo,status,priority}=eachTodo
+   const {id,todo,status}=eachTodo
    const checkStatus=status==="DONE"?'checked':null
    const check=status==="DONE"? 'true':''
 
    const onChangeCheckbox=e=>{
-    console.log(e.target.values)
+    console.log(e.target.checked)
    }
 
     return (
